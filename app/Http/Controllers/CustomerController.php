@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
+
+
+    public function index()
+    {
+    $this->authorize('viewAny', Customer::class);
+
+        $customer = Customer::paginate(7); // Lấy 3 người dùng trên mỗi trang
+
+        return view('customers.index', compact('customer'));
+    }
     //
     public function register()
     {

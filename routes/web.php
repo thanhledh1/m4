@@ -6,6 +6,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\LangController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
+
+
 
 
 
@@ -21,7 +25,63 @@ use App\Http\Controllers\CustomerController;
 |
 */
 
-// bang categories
+
+
+
+
+
+
+//usẻ
+Route::get('apple', [ShopController::class, 'apple'])->name('shop.apple');
+Route::get('samsung', [ShopController::class, 'samsung'])->name('shop.samsung');
+Route::get('vivo', [ShopController::class, 'vivo'])->name('shop.vivo');
+Route::get('xiaomi', [ShopController::class, 'xiaomi'])->name('shop.xiaomi');
+// login
+Route::get('/register', [CustomerController::class, 'register'])->name('shop.register');
+Route::post('/checkregister', [CustomerController::class, 'checkregister'])->name('shop.checkregister');
+Route::get('/login-index', [CustomerController::class, 'indexlogin'])->name('login.index');
+Route::post('/login', [CustomerController::class, 'checklogin'])->name('shop.checklogin');
+Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
+
+Route::get('/checkout', [CustomerController::class, 'checkOut'])->name('checkOut');
+Route::post('/checkout', [CustomerController::class, 'logout'])->name('logout');
+Route::prefix('shop')->group(function () {
+    Route::get('/', [ShopController::class, 'index']);
+    Route::get('/{id}/show', [ShopController::class, 'show'])->name('shop.show');
+    Route::get('/search2', [ShopController::class, 'search'])->name('shop.search');
+});
+
+Route::get('/', [ShopController::class, 'index'])->name('shop.index');
+Route::get('cart', [ShopController::class, 'cart'])->name('cart');
+Route::get('add-to-cart/{id}', [ShopController::class, 'addToCart'])->name('add.to.cart');
+Route::patch('update-cart', [ShopController::class, 'update'])->name('update.cart');
+Route::delete('remove-from-cart', [ShopController::class, 'remove'])->name('remove.from.cart');
+
+
+
+
+
+
+Route::get('/', [AuthController::class, 'login'])->name('login');
+Route::post('/postlogin', [AuthController::class, 'postlogin'])->name('postlogin');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//adminư
+Route::prefix('/')->middleware(['auth', 'preventBackHistory'])->group(function () {
+
+Route::group(['prefix' => 'users'], function () {
+    Route::get('/', [UserController::class, 'index'])->name('user.index');
+    Route::get('/create', [UserController::class, 'create'])->name('user.create');
+    Route::post('/store', [UserController::class, 'store'])->name('user.store');
+    Route::get('/show/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/update/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::get('/editpass/{id}', [UserController::class, 'editpass'])->name('user.editpass');
+    Route::put('/updatepass/{id}', [UserController::class, 'updatepass'])->name('user.updatepass');
+    Route::get('/adminpass/{id}', [UserController::class, 'adminpass'])->name('user.adminpass');
+    Route::put('/adminUpdatePass/{id}', [UserController::class, 'adminUpdatePass'])->name('user.adminUpdatePass');
+});
 Route::prefix('category')->group(function () {
     Route::get('/', [CategoryController::class, 'index'])->name('category.index');
     Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
@@ -43,57 +103,5 @@ Route::prefix('product')->group(function () {
     Route::delete('/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 });
 Route::get('/search1', [ProductController::class, 'search'])->name('product.search');
-
-
-//layouts
-Route::get('/master', function () {
-    return view('masteradmin');
-});
-Route::get('/masteruser', function () {
-    return view('masteruser');
-});
-
-
-Route::prefix('shop')->group(function () {
-    Route::get('/', [ShopController::class, 'index']);
-    Route::get('/{id}/show', [ShopController::class, 'show'])->name('shop.show');
-    Route::get('/search2', [ShopController::class, 'search'])->name('shop.search');
-});
-
-Route::get('/', [ShopController::class, 'index'])->name('shop.index');
-Route::get('cart', [ShopController::class, 'cart'])->name('cart');
-Route::get('add-to-cart/{id}', [ShopController::class, 'addToCart'])->name('add.to.cart');
-Route::patch('update-cart', [ShopController::class, 'update'])->name('update.cart');
-Route::delete('remove-from-cart', [ShopController::class, 'remove'])->name('remove.from.cart');
-
-Route::get('/master1', function () {
-    return view('masteruser1');
-});
-
-//chuyen doi ngon ngu
 Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
-
-
-
-
-
-Route::get('/test', function () {
-    return view('test');
 });
-
-//danhmuc
-Route::get('apple', [ShopController::class, 'apple'])->name('shop.apple');
-Route::get('samsung', [ShopController::class, 'samsung'])->name('shop.samsung');
-Route::get('vivo', [ShopController::class, 'vivo'])->name('shop.vivo');
-Route::get('xiaomi', [ShopController::class, 'xiaomi'])->name('shop.xiaomi');
-// login
-Route::get('/register', [CustomerController::class, 'register'])->name('shop.register');
-Route::post('/checkregister', [CustomerController::class, 'checkregister'])->name('shop.checkregister');
-Route::get('/login-index', [CustomerController::class, 'indexlogin'])->name('login.index');
-Route::post('/login', [CustomerController::class, 'checklogin'])->name('shop.checklogin');
-
-Route::get('/checkout', [CustomerController::class, 'checkOut'])->name('checkOut');
-Route::post('/checkout', [CustomerController::class, 'logout'])->name('logout');
-
-
-

@@ -1,10 +1,10 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <!-- <a class="nav-link" href="../../index.html">
+            {{-- <!-- <a class="nav-link" href="../../index.html">
               <i class="mdi mdi-grid-large menu-icon"></i>
               <span class="menu-title">Dashboard</span>
-            </a> -->
+            </a> --> --}}
           </li>
           <li class="nav-item nav-category">Manage</li>
           <li class="nav-item">
@@ -15,18 +15,18 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="http://127.0.0.1:8000/category">Categories</a></li>
-                <li class="nav-item"> <a class="nav-link" href="http://localhost/M3/casestudym3/index.php?controller=product&action=index">Products</a></li>
-                <li class="nav-item"> <a class="nav-link" href="http://localhost/M3/casestudym3/index.php?controller=customer&action=index">Customers</a></li>
-                <li class="nav-item"> <a class="nav-link" href="http://localhost/M3/casestudym3/index.php?controller=order&action=index">Order</a></li>
-                <li class="nav-item"> <a class="nav-link" href="http://localhost/M3/casestudym3/index.php?controller=orderdetail&action=index">orderdetails</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('category.index')}}">Categories</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('product.index')}}">Products</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('customer.index')}}">Customers</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('user.index')}}">Users</a></li>
+                {{-- <li class="nav-item"> <a class="nav-link" href="http://localhost/M3/casestudym3/index.php?controller=orderdetail&action=index">orderdetails</a></li> --}}
 
 
               </ul>
             </div>
           </li>
-          <!-- <li class="nav-item nav-category">Forms and Datas</li>
-          <li class="nav-item">
+          {{-- {{-- <!-- <li class="nav-item nav-category">Forms and Datas</li> --}}
+          {{-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="menu-icon mdi mdi-card-text-outline"></i>
               <span class="menu-title">Form elements</span>
@@ -37,8 +37,8 @@
                 <li class="nav-item"><a class="nav-link" href="../../pages/forms/basic_elements.html">Basic Elements</a></li>
               </ul>
             </div>
-          </li>
-          <li class="nav-item">
+          </li> --}}
+          {{-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
               <i class="menu-icon mdi mdi-chart-line"></i>
               <span class="menu-title">Charts</span>
@@ -73,7 +73,7 @@
                 <li class="nav-item"> <a class="nav-link" href="../../pages/icons/mdi.html">Mdi icons</a></li>
               </ul>
             </div>
-          </li> -->
+          </li> --}}
           <li class="nav-item nav-category">pages</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
@@ -83,10 +83,14 @@
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="http://localhost/M3/casestudym3/login.php"> Login </a></li>
+                {{-- <li class="nav-item"> <a class="nav-link" href="http://localhost/M3/casestudym3/login.php"> Login </a></li> --}}
               </ul>
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="http://localhost/M3/casestudym3/register.php"> Register </a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form></li>
               </ul>
             </div>
           </li>

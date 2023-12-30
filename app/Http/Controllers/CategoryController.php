@@ -18,10 +18,13 @@ class CategoryController extends Controller
 {
         public function create()
         {
+
             return view('categories.create');
         }
         public function index()
         {
+        $this->authorize('viewAny', Category::class);
+
             $Categories = Category::paginate(3); // Lấy 3 người dùng trên mỗi trang
 
             return view('categories.index', compact('Categories'));
