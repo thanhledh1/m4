@@ -1,13 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Group;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 class GroupController extends Controller
 {
     /**
@@ -18,7 +15,6 @@ class GroupController extends Controller
     public function index()
     {
         $this->authorize('viewAny',Group::class);
-
         $groups = Group::search()->paginate(4);;
         $users= User::get();
         $param = [
@@ -27,7 +23,6 @@ class GroupController extends Controller
         ];
         return view('group.index', $param );
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -36,10 +31,8 @@ class GroupController extends Controller
     public function create()
     {
         $this->authorize('create',Group::class);
-
         return view('group.add');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -48,7 +41,6 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-
         $notification = [
             'addgroup' => 'Thêm Tên Quyền Thành Công!',
         ];
@@ -57,7 +49,6 @@ class GroupController extends Controller
         $group->save();
         return redirect()->route('group.index')->with($notification);
     }
-
     /**
      * Display the specified resource.
      *
@@ -68,7 +59,6 @@ class GroupController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -78,11 +68,9 @@ class GroupController extends Controller
     public function edit($id)
     {
         $this->authorize('update',Group::class);
-
         $group = Group::find($id);
         return view('group.edit', compact('group') );
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -111,6 +99,7 @@ class GroupController extends Controller
     {
         $group = Group::find($id);
         $group->delete();
+        return redirect()->route('group.index');
     }
      /**
      * Show the form for editing the specified resource.
@@ -121,7 +110,6 @@ class GroupController extends Controller
     public function detail($id)
     {
         $group=Group::find($id);
-
         $current_user = Auth::user();
         $userRoles = $group->roles->pluck('id', 'name')->toArray();
         // dd($userRoles);
@@ -139,7 +127,6 @@ class GroupController extends Controller
         ];
         return view('group.detail',$params);
     }
-
      /**
      * Update the specified resource in storage.
      *

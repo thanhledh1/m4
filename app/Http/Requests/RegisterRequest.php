@@ -26,7 +26,7 @@ class RegisterRequest extends FormRequest
             'address' => 'required',
             'email' => 'required|unique:customers,email',
             'phone' => 'required',
-            'password' => 'required',
+            // 'password' => 'required',
 
 
         ];
@@ -39,7 +39,7 @@ class RegisterRequest extends FormRequest
             'email.required' =>' email Không được bỏ trống',
             'email.unique' => 'Email đã được sử dụng.',
             'phone.required' =>' phone Không được bỏ trống',
-            'password.required' =>'password Không được bỏ trống',
+            // 'password.required' =>'password Không được bỏ trống',
         ];
     }
 }

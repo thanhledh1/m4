@@ -46,7 +46,7 @@ class CustomerController extends Controller
         } else {
 
 
-            return redirect()->route('shop.index');
+            return redirect()->route('shop.register');
         }
     }
 

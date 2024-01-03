@@ -100,8 +100,8 @@
 
                 data-lightbox="example-set"
                 data-title="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae cursus ligula">
-                <img id="avtshow" src="{{asset('http://localhost/M3/casestudym3/storage/app/public/images/user/' . $user->image)}}"
-                    alt="" />
+                <img style="width:200px ; height: 165px ; border-radius:0%"
+                src="{{ asset('public/uploads/users/' . $user->image) }}" alt="">
 
             </a>
         </div>

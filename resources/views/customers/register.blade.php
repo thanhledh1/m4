@@ -118,14 +118,12 @@
             @enderror
 
             <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" id="psw">
-            @error('password')
-            <div style="color: red">{{ $message }}</div>
-            @enderror
+            <input type="password" placeholder="Enter Password" name="psw" id="psw">
+
 
             <label for="psw-repeat"><b>Repeat Password</b></label>
             <input type="password" placeholder="Repeat Password" name="psw_repeat" id="psw-repeat">
-            <div id="error-container" style="color: red;"></div>
+
 
             <hr>
             <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
@@ -133,7 +131,19 @@
             <button type="submit" class="registerbtn">Register</button>
         </div>
 
+
         <div class="container signin">
+
+            <div class="container">
+                <div class="row">
+                  <div class="col-md-12 row-block">
+                   <a href="{{ url('auth/google') }}" class="btn btn-lg btn-primary btn-block">
+                   <strong>Login With Google</strong>
+                   </a>
+                  </div>
+                </div>
+             </div>
+
             <p>Already have an account? <a href="#">Sign in</a>.</p>
         </div>
     </form>

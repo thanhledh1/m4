@@ -6,7 +6,7 @@
               <span class="menu-title">Dashboard</span>
             </a> --> --}}
           </li>
-          <li class="nav-item nav-category">Manage</li>
+          <li class="nav-item nav-category">QUẢN LÝ</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-floor-plan"></i>
@@ -15,11 +15,14 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{route('category.index')}}">Categories</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{route('product.index')}}">Products</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{route('customer.index')}}">Customers</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{route('user.index')}}">Users</a></li>
-                {{-- <li class="nav-item"> <a class="nav-link" href="http://localhost/M3/casestudym3/index.php?controller=orderdetail&action=index">orderdetails</a></li> --}}
+                <li class="nav-item"> <a class="nav-link" href="{{route('category.index')}}">Danh mục Sản Phẩm</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('product.index')}}">Sản Phẩm</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('customer.index')}}">Khách Hàng</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('user.index')}}">Tài Khoản</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('group.index')}}">Phân Quyền</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('product.trash')}}">Thùng Rác Sản Phẩm</a></li>
+
+
 
 
               </ul>
@@ -94,12 +97,5 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item nav-category">help</li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://bootstrapdash.com/demo/star-admin2-free/docs/documentation.html">
-              <i class="menu-icon mdi mdi-file-document"></i>
-              <span class="menu-title">Documentation</span>
-            </a>
-          </li>
-        </ul>
+    
       </nav>

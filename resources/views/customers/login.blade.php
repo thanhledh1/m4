@@ -1,4 +1,14 @@
 <style>
+
+.alert-danger {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+        padding: 8px;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+
     .noi-dung {
   display: flex;
   justify-content: center;
@@ -88,12 +98,17 @@ p a:hover {
 
                 <div class="input-form">
                     <span>Email</span>
-                    <input type="text" name="email">
+                    <input type="text" name="email" value="{{ old('email') }}">
                 </div>
                 <div class="input-form">
                     <span>Password</span>
                     <input type="password" name="password">
                 </div>
+                @if ($errors->has('password'))
+    <div class="alert alert-danger">
+        {{ $errors->first('password') }}
+    </div>
+@endif
                 <div class="nho-dang-nhap">
                     <label><input type="checkbox" name=""> Remember password</label>
                 </div>

@@ -119,4 +119,30 @@ class ProductController extends Controller
         $product = Product::find($id);
         return view('products.show', compact('product'));
     }
+
+
+    public  function softdeletes($id)
+    {
+        $this->authorize('delete', Product::class);
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $product = Product::findOrFail($id);
+        $product->deleted_at = date("Y-m-d h:i:s");
+        $product->save();
+        return redirect()->route('product.index');
+    }
+    public function restoredelete($id)
+    {
+        // $this->authorize('restore', Category::class);
+        $products = Product::withTrashed()->where('id', $id);
+        $products->restore();
+        return redirect()->route('product.trash');
+    }
+
+    public  function trash()
+    {
+        $products = Product::onlyTrashed()->paginate(3);
+        $param = ['products' => $products];
+        return view('products.trash', $param);
+        dd(223);
+    }
 }
