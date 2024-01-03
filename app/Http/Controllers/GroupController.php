@@ -15,7 +15,7 @@ class GroupController extends Controller
     public function index()
     {
         $this->authorize('viewAny',Group::class);
-        $groups = Group::search()->paginate(4);;
+        $groups = Group::search()->paginate(10);;
         $users= User::get();
         $param = [
             'groups' => $groups,

@@ -18,6 +18,7 @@
                 <li class="nav-item"> <a class="nav-link" href="{{route('category.index')}}">Danh mục Sản Phẩm</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{route('product.index')}}">Sản Phẩm</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{route('customer.index')}}">Khách Hàng</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('customer.index')}}">Đơn Hàng</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{route('user.index')}}">Tài Khoản</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{route('group.index')}}">Phân Quyền</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{route('product.trash')}}">Thùng Rác Sản Phẩm</a></li>

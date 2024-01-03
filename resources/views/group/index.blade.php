@@ -65,7 +65,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{-- {{ $groups->appends(request()->query()) }} --}}
+                    {{ $groups->appends(request()->query()) }}
                 </div>
             </div>
     </section>

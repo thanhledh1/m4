@@ -45,10 +45,10 @@
                 <tr>
                     <td>{{ $r->name }}</td>
                     <td>
-                        <form action="/category/{{ $r->id }}" method="POST">
+                        <form action="{{ route('category.destroy', $r->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a class="badge badge-info" href="/category/{{ $r->id }}/edit">{{ __('message.edit') }}</a>
+                            <a class="badge badge-info" href="{{route('category.edit',$r->id)}}">{{ __('message.edit') }}</a>
                             <button class="badge badge-danger" type="submit">{{ __('message.delete') }}</button>
                         </form>
                     </td>
@@ -58,3 +58,18 @@
     </table>
     {{ $Categories->links('pagination::bootstrap-4') }}
 @endsection
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script>
+    $(document).ready(function() {
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        @endif
+    });
+</script>

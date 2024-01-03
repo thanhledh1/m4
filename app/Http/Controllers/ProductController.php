@@ -52,7 +52,7 @@ class ProductController extends Controller
 
         $product = Product::orderBy('created_at', 'desc')->paginate(3);
         // return redirect()->route('product.index', compact('product'));
-        return view('products.index', compact('product'));
+        return redirect()->route('product.index')->with('success', 'Thao tác thành công!');
 
     }
 
@@ -93,13 +93,14 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Thao tác thành công!');
     }
     public function destroy($id)
     {
-        $product = Product::find($id);
-        $product->delete();
-        return redirect()->route('product.index');
+        $this->authorize('forceDelete', Product::class);
+        $product = Product::onlyTrashed()->findOrFail($id);
+        $product->forceDelete();
+        return redirect()->route('product.index')->with('success', 'Thao tác thành công!');
     }
 
 
@@ -128,14 +129,14 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->deleted_at = date("Y-m-d h:i:s");
         $product->save();
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Thao tác thành công!');;
     }
     public function restoredelete($id)
     {
         // $this->authorize('restore', Category::class);
         $products = Product::withTrashed()->where('id', $id);
         $products->restore();
-        return redirect()->route('product.trash');
+        return redirect()->route('product.trash')->with('success', 'Thao tác thành công!');;
     }
 
     public  function trash()

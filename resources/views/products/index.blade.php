@@ -75,17 +75,6 @@
                                 <img style="width:200px; height:165px; border-radius:0%" src="{{ asset('public/uploads/product/' . $r->image) }}" alt="">
                             </td>
                             <td>
-                                {{-- <form action="{{ route('product.softdeletes', $r->id) }}" method="post">
-                                    @method('PUT')
-                                    @csrf
-                                    <button onclick="return confirm('Bạn có muốn chuyển danh mục này vào thùng rác không?');" class="badge badge-danger">Xóa</button>
-                                    <a class="badge badge-info" href="/product/{{ $r->id }}/edit">{{ __('message.edit') }}</a>
-                                    <a class="badge badge-success" href="/product/{{ $r->id }}/show">{{ __('message.show') }}</a>
-                                </form> --}}
-
-
-
-
                                 <form action="{{ route('product.softdeletes', $r->id) }}" method="post">
                                     @method('PUT')
                                     @csrf
@@ -93,33 +82,10 @@
                                     <button onclick="return confirm('Bạn có muốn chuyển danh mục này vào thùng rác không?');" class="badge badge-danger">Xóa</button>
                                     @endif
                                     @if (Auth::user()->hasPermission('Product_update'))
-                                    <a class="badge badge-info" href="/product/{{ $r->id }}/edit">{{ __('message.edit') }}</a>
+                                    <a class="badge badge-info" href="{{route('product.edit',$r->id)}}">{{ __('message.edit') }}</a>
                                     @endif
-                                    <a class="badge badge-success" href="/product/{{ $r->id }}/show">{{ __('message.show') }}</a>
+                                    <a class="badge badge-success" href="{{route('product.show',$r->id)}}">{{ __('message.show') }}</a>
                                 </form>
-
-
-{{--
-                                <form action="{{ route('group.destroy', $group->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    @if (Auth::user()->hasPermission('Group_update'))
-                                    <a class="btn btn-primary " href="{{route('group.detail', $group->id)}}">Trao Quyền</a>
-                                    @endif
-                                    @if (Auth::user()->hasPermission('Group_update'))
-                                    <a href="{{ route('group.edit', $group->id) }}"
-                                        class="btn btn-warning">Sửa</a>
-                                    @endif
-                                        @if (Auth::user()->hasPermission('Group_forceDelete'))
-                                        <a data-href="{{ route('group.destroy', $group->id) }}"
-                                            id="{{ $group->id }}" class="btn btn-danger sm deleteIcon">Xóa</a>
-                                        @endif
-                                </form> --}}
-
-
-
-
-
                             </td>
                         </tr>
                     @endforeach
@@ -131,4 +97,18 @@
   </div>
   {{ $product->links('pagination::bootstrap-4') }}
   @endsection
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script>
+      $(document).ready(function() {
+          @if(session('success'))
+              Swal.fire({
+                  icon: 'success',
+                  title: '{{ session('success') }}',
+                  showConfirmButton: false,
+                  timer: 1500
+              });
+          @endif
+      });
+  </script>

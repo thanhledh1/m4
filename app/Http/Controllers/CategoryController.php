@@ -55,7 +55,7 @@ class CategoryController extends Controller
 
                 DB::commit();
 
-                return redirect()->route('category.index');
+                return redirect()->route('category.index')->with('success', 'Thêm mới thành công!');;
             } catch (\Exception $ex) {
                 DB::rollback();
                 // Xử lý ngoại lệ (exception) ở đây nếu cần thiết
@@ -72,13 +72,13 @@ class CategoryController extends Controller
             $Categories->name = $request->name;
             $Categories->save();
 
-            return redirect()->route('category.index');
+            return redirect()->route('category.index')->with('success', 'Thao tác thành công!');;
         }
         public function destroy($id)
         {
             $Categories = Category::find($id);
             $Categories->delete();
-            return redirect()->route('category.index');
+            return redirect()->route('category.index')->with('success', 'Xoá thành công!');;
         }
         public function search(Request $request)
         {
