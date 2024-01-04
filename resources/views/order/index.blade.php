@@ -1,9 +1,9 @@
 @extends('masteradmin')
 @section('content')
-    <h1 class="offset-4">Đơn hàng</h1>
+    <h1 style="text-align: center">Đơn hàng</h1>
     <hr>
     {{-- <td> <a style="width:50%" class="btn btn-warning" href="{{ route('xuat') }}">Xuất file excel </a> </td> --}}
-    <table class="table table-bordered">
+    <table  class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">STT</th>

@@ -131,7 +131,7 @@ Route::group(['prefix' => 'groups'], function () {
     Route::post('/store', [GroupController::class, 'store'])->name('group.store');
     Route::get('/edit/{id}', [GroupController::class, 'edit'])->name('group.edit');
     Route::put('/update/{id}', [GroupController::class, 'update'])->name('group.update');
-    Route::delete('destroy/{id}', [GroupController::class, 'destroy'])->name('group.destroy');
+    Route::get('destroy/{id}', [GroupController::class, 'destroy'])->name('group.destroy');
     Route::get('/detail/{id}', [GroupController::class, 'detail'])->name('group.detail');
     Route::put('/group_detail/{id}', [GroupController::class, 'group_detail'])->name('group.group_detail');
 

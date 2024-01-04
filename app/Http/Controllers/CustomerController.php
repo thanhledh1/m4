@@ -15,9 +15,9 @@ class CustomerController extends Controller
 
     public function index()
     {
-    $this->authorize('viewAny', Customer::class);
+        $this->authorize('viewAny', Customer::class);
 
-        $customer = Customer::paginate(7); // Lấy 3 người dùng trên mỗi trang
+        $customer = Customer::paginate(10); // Lấy 3 người dùng trên mỗi trang
 
         return view('customers.index', compact('customer'));
     }
@@ -42,7 +42,7 @@ class CustomerController extends Controller
         if ($request->psw == $request->psw_repeat) {
             $customer->save();
 
-            return redirect()->route('shop.index');
+            return redirect()->route('login.index');
         } else {
 
 

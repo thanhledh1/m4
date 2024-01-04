@@ -1,9 +1,9 @@
 @extends('masteradmin')
 @section('content')
 <div class="pagetitle">
-    <h1>Chi tiết đơn hàng</h1>
+    <h1 style="text-align: center">Chi tiết đơn hàng</h1>
 </div>
-<table class="table table-bordered">
+<table  class="table table-striped">
     <thead>
         <tr>
             <th scope="col">STT</th>

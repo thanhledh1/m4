@@ -124,6 +124,20 @@ border-radius:50%;
             text: "Ngu!",
             }).bindClickHandler('data-swal-toast-template')
         </script>
+
+<script>
+    $(document).ready(function() {
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        @endif
+    });
+</script>
+
 </section>
 </main>
 @endsection

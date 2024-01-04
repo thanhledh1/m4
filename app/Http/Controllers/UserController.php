@@ -74,11 +74,8 @@ class UserController extends Controller
         ];
 
 
-        $notification = [
-            'message' => 'Đăng ký thành công!',
-            'alert-type' => 'success'
-        ];
-        return redirect()->route('user.index')->with($notification);
+
+        return redirect()->route('user.index')->with('success', 'Thao tác thành công!');
     }
     public function show($id)
     {
@@ -135,7 +132,7 @@ class UserController extends Controller
             'message' => 'Chỉnh Sửa Thành Công!',
             'alert-type' => 'success'
         ];
-        return redirect()->route('user.index')->with($notification);
+        return redirect()->route('user.index')->with('success', 'Thao tác thành công!');
     }
     // hiển thị form đổi mật khẩu
     public function editpass($id)

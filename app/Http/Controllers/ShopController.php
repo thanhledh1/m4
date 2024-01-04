@@ -172,7 +172,7 @@ class ShopController extends Controller
 
         // dd($request);
         // alert()->success('Thêm Đơn Đặt: '.$request->name,'Thành Công');
-        return redirect()->route('shop.index')->with($notification);;
+        return redirect()->route('shop.index')->with('success', 'Đặt Hàng thành công!');
         // }
         // } catch (\Exception $e) {
         //     // dd($request);

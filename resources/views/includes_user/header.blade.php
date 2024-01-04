@@ -10,17 +10,40 @@
         </div>
         <div class="col-lg-6 text-center text-lg-right">
             <div class="d-inline-flex align-items-center">
-                <div class="btn-group">
+                {{-- <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="{{route('login.index')}}" class="dropdown-item">Sign in</a>
+                        <a hrefrou="{{te('login.index')}}" class="dropdown-item">Sign in</a>
                         <form action="{{ route('logout.user') }}" method="POST">
                             @csrf
                             <button type="submit" class="dropdown-item">Log out</button>
                           </form>
 
                     </div>
+                </div> --}}
+
+
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Xin Chào
+                        @if (isset(Auth()->guard('customers')->user()->name))
+                            {{ Auth()->guard('customers')->user()->name }}
+                        @else
+                            My Account
+                        @endif
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        @if (isset(Auth()->guard('customers')->user()->name))
+                            <form action="{{ route('logout.user') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="dropdown-item">Đăng Xuất</button>
+                            </form>
+                        @else
+                            <a href="{{ route('login.index') }}" class="dropdown-item" type="button">Đăng Nhập</a>
+                        @endif
+                    </div>
                 </div>
+
                 {{-- <div class="btn-group mx-2">
                     <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -52,7 +75,7 @@
     </div>
     <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
         <div class="col-lg-4">
-            <a href="http://127.0.0.1:8000/" class="text-decoration-none">
+            <a href="{{ route('shop.index')}}" class="text-decoration-none">
                 <span class="h1 text-uppercase text-primary bg-dark px-2">thegioididong</span>
                 <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">.com</span>
             </a>

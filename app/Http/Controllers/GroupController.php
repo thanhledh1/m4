@@ -99,7 +99,7 @@ class GroupController extends Controller
     {
         $group = Group::find($id);
         $group->delete();
-        return redirect()->route('group.index');
+        return redirect()->route('group.index')->with('success', 'Thao tác thành công!');;
     }
      /**
      * Show the form for editing the specified resource.
@@ -136,13 +136,10 @@ class GroupController extends Controller
      */
     public function group_detail(Request $request,$id)
     {
-        $notification = [
-            'message' => 'Cấp Quyền Thành Công!',
-            'alert-type' => 'success'
-        ];
+
         $group= Group::find($id);
         $group->roles()->detach();
         $group->roles()->attach($request->roles);
-        return redirect()->route('group.index')->with($notification);;
+        return redirect()->route('group.index')->with('success', 'Thao tác thành công!');
     }
 }
