@@ -6,6 +6,7 @@ use App\Exports\OrderExport;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -108,7 +109,9 @@ class OrderController extends Controller
         return redirect()->route('order.index')->with('success', 'Đơn hàng đã được xóa thành công.');
     }
 
-    // public function exportOrder(){
-    //     return Excel::download(new OrderExport, 'order.xlsx');
-    // }
+    public function exportOrder(){
+        return Excel::download(new OrderExport, 'order.xlsx');
+    }
+
+
 }

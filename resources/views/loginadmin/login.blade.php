@@ -168,7 +168,7 @@
  <section>
      <!--Bắt Đầu Phần Hình Ảnh-->
      <div class="img-bg">
-         <img src="https://niemvuilaptrinh.ams3.cdn.digitaloceanspaces.com/tao_trang_dang_nhap/hinh_anh_minh_hoa.jpg" alt="Hình Ảnh Minh Họa">
+         <img src="https://lh3.googleusercontent.com/proxy/EQRqrYnArWnev1TdRHJvwuvEIgdFfLGdMTT4TgYYF7_2HiW1ytofem305nqpX1ZMh3Kx1tkoQcCAmY4ODuPWT7I" alt="Hình Ảnh Minh Họa">
      </div>
      <!--Kết Thúc Phần Hình Ảnh-->
      <!--Bắt Đầu Phần Nội Dung-->

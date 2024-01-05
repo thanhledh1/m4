@@ -73,7 +73,6 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->quantity = $request->quantity;
         $product->status = $request->status;
-        // $product->image = $request->image;
         $categories = Category::find($request->category_id);
         $product->category_id = $categories->id;
         $get_image = $request->image;

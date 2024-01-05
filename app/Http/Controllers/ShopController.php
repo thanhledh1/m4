@@ -158,27 +158,13 @@ class ShopController extends Controller
                 ->where('id', '=', $orderItem->product_id)
                 ->decrement('quantity', $orderItem->quantity);
         }
-        $notification = [
-            'message' => 'success',
-        ];
+      
         $data = [
             'name' => $request->name,
             'pass' => $request->password,
         ];
-        // Mail::send('mail.mail', compact('data'), function ($email) use ($request) {
-        //     $email->subject('Shein Shop');
-        //     $email->to($request->email, $request->name);
-        // });
 
-        // dd($request);
-        // alert()->success('Thêm Đơn Đặt: '.$request->name,'Thành Công');
         return redirect()->route('shop.index')->with('success', 'Đặt Hàng thành công!');
-        // }
-        // } catch (\Exception $e) {
-        //     // dd($request);
-        //     Log::error($e->getMessage());
-        //     // toast('Đặt hàng thấy bại!', 'error', 'top-right');
-        //     return redirect()->route('shop.index');
-        // }
+
     }
 }

@@ -10,6 +10,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\LoginGoogleController;
+
 
 
 
@@ -28,11 +30,6 @@ use App\Http\Controllers\OrderController;
 */
 
 
-
-
-Route::get('google', function () {
-    return view('googleAuth');
-});
 
 
 
@@ -72,6 +69,7 @@ Route::prefix('order')->group(function () {
     Route::get('/', [OrderController::class, 'index'])->name('order.index');
     Route::get('/detail/{id}', [OrderController::class, 'detail'])->name('order.detail');
     Route::delete('/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
+    Route::get('/xuat', [OrderController::class, 'exportOrder'])->name('xuat');
 
 
 });
@@ -139,3 +137,6 @@ Route::group(['prefix' => 'groups'], function () {
 
 
 });
+// login by google
+Route::get('auth/google', [LoginGoogleController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [LoginGoogleController::class, 'handleGoogleCallback']);

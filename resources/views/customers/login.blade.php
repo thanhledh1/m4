@@ -118,7 +118,19 @@ p a:hover {
             </form>
             <div class="input-form">
                 <p>Do not have an account? <a href="{{ route('shop.register') }}">Register</a></p>
+
+                <p>Login With   <a href="{{ url('auth/google') }}"> </a> <img
+                    src="{{ asset('user/img/google.png') }}" alt=""
+                    style="width: 20px; height: auto;" onclick="redirectToLogin()"></p>
+            <script>
+                function redirectToLogin() {
+                    window.location.href = "{{ url('auth/google') }}";
+                }
+            </script>
+
             </div>
         </div>
     </div>
+
+
 
