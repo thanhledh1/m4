@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
+
     public function index()
     {
         $this->authorize('viewAny', User::class);
@@ -67,16 +68,13 @@ class UserController extends Controller
             $data['product_image'] = $new_image;
         }
         $user->save();
-
         $data = [
             'name' => $request->name,
             'pass' => $request->password,
         ];
-
-
-
         return redirect()->route('user.index')->with('success', 'Thao tác thành công!');
     }
+
     public function show($id)
     {
         $this->authorize('view', User::class);
@@ -84,9 +82,6 @@ class UserController extends Controller
         $param = [
             'user' => $user,
         ];
-
-
-        // $productshow-> show();
         return view('user.profile', $param);
     }
 
@@ -107,7 +102,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
-        // $user->password = bcrypt($request->password);
+        $user->password = bcrypt($request->password);
         $user->address = $request->address;
         $user->phone = $request->phone;
         $user->birthday = $request->birthday;
@@ -128,12 +123,9 @@ class UserController extends Controller
             $data['product_image'] = $new_image;
         }
         $user->save();
-        $notification = [
-            'message' => 'Chỉnh Sửa Thành Công!',
-            'alert-type' => 'success'
-        ];
         return redirect()->route('user.index')->with('success', 'Thao tác thành công!');
     }
+
     // hiển thị form đổi mật khẩu
     public function editpass($id)
     {
@@ -144,6 +136,7 @@ class UserController extends Controller
         ];
         return view('user.editpass', $param);
     }
+    
     // chỉ có superAdmin mới có quyền đổi mật khẩu người kh
     public function adminUpdatePass(Request $request, $id)
     {
@@ -166,35 +159,6 @@ class UserController extends Controller
             return back()->with($notification);
         }
     }
-
-    public function updatepass(Request $request)
-    {
-        if ($request->renewpassword == $request->newpassword) {
-            if ((Hash::check($request->password, Auth::user()->password))) {
-                $item = User::find(Auth()->user()->id);
-                $item->password = bcrypt($request->newpassword);
-                $item->save();
-                $notification = [
-                    'message' => 'Đổi mật khẩu thành công!',
-                    'alert-type' => 'success'
-                ];
-                return redirect()->route('user.index')->with($notification);
-            } else {
-                // dd($request);
-                $notification = [
-                    'saipass' => '!',
-
-                ];
-                return back()->with($notification);
-            }
-        } else {
-            $notification = [
-                'sainhap' => '!',
-            ];
-            return back()->with($notification);
-        }
-    }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -204,10 +168,6 @@ class UserController extends Controller
     public function destroy($id)
     {
         $this->authorize('forceDelete', Product::class);
-        $notification = [
-            'sainhap' => '!',
-        ];
-
         $user = User::find($id);
         if ($user->group->name != 'Supper Admin') {
             $user->delete();

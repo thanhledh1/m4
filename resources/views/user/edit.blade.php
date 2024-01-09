@@ -21,7 +21,7 @@
                                             <legend>Thông tin cơ bản</legend>
                                             <div class="row">
 
-                                                <div class="col-lg-12">
+                                                <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label for="tf1">Email<abbr
                                                                 name="Trường bắt buộc">*</abbr></label>
@@ -33,6 +33,22 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="tf1">Mật Khẩu<abbr
+                                                                name="Trường bắt buộc">*</abbr></label>
+                                                        <input name="password" type="text" class="form-control"
+                                                        value="{{ $user->password }}">
+                                                        <small id="" class="form-text text-muted"></small>
+                                                        @error('password')
+                                                            <div class="text text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                        <br>
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-lg-4">
                                                     <div class="form-group">
                                                         <label for="tf1">Họ Và Tên<abbr

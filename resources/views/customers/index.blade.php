@@ -12,30 +12,9 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 @section('content')
 <h1 style="text-align: center"> Danh sách Khách hàng</h1>
-{{-- <ul style="list-style-type: none;">
-<li >
-    <select class=" changeLang">
-        <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>EN</option>
-        <option value="vi" {{ session()->get('locale') == 'vi' ? 'selected' : '' }}>VI</option>
-    </select>
-
-</li>
-</ul>
-    <div class="container">
-        <form action="{{ route('product.search') }}" method="GET">
-            <input  type="text" name="keyword" placeholder="Enter keyword" value="{{ old('keyword') }}">
-            <button class="btn btn-primary btn-sm" type="submit">Search</button>
-        </form>
-
-    </div> --}}
-
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        {{-- <h4 class="card-title">Striped Table</h4> --}}
-        {{-- <p class="card-description">
-          Add class <code>.table-striped</code>
-        </p> --}}
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>

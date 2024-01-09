@@ -1,3 +1,13 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<style>
+#items_container .content_box div {
+    box-shadow: 0 0 3px rgba(0, 0, 0, .3);
+    padding: 15px;
+    margin-bottom: 20px;
+}
+</style>
+
 @extends('masteruser')
 @section('content1')
 <div class="container-fluid mb-3">
@@ -14,8 +24,8 @@
                         <img class="position-absolute w-100 h-100" src="https://i.ytimg.com/vi/vMVwdSp489E/sddefault.jpg" style="object-fit: cover;">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
-                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Men Fashion</h1>
-                                <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
+                                {{-- <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Men Fashion</h1> --}}
+                                {{-- <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p> --}}
                                 <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
                             </div>
                         </div>
@@ -24,8 +34,8 @@
                         <img class="position-absolute w-100 h-100" src="https://stcv4.hnammobile.com/uploads/news/large/iphone-14-series-luon-co-san-hang-giao-ngay-khong-can-doi-social.jpg?v=1668565357" style="object-fit: cover;">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
-                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Women Fashion</h1>
-                                <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
+                                {{-- <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Women Fashion</h1> --}}
+                                {{-- <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p> --}}
                                 <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
                             </div>
                         </div>
@@ -34,8 +44,8 @@
                         <img class="position-absolute w-100 h-100" src="https://uploads-ssl.webflow.com/6073fad993ae97919f0b0772/609fa7b53c435fb27393587d_dd5787fa0c9306323b7176ce91a4d31ff6041c4a2.jpg" style="object-fit: cover;">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
-                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Kids Fashion</h1>
-                                <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p>
+                                {{-- <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Kids Fashion</h1> --}}
+                                {{-- <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam</p> --}}
                                 <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
                             </div>
                         </div>
@@ -137,7 +147,7 @@
                 <button class="btn btn-primary btn-sm" type="submit">Search</button>
             </form>
         </div>
-        <div class="row px-xl-5">
+        <div class="row px-xl-5" id="items_container">
     @foreach($products as $product)
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
@@ -146,25 +156,146 @@
                         <img style="width:200px ; height: 165px ; border-radius:0%"
                         src="{{ asset('public/uploads/product/' . $product->image) }}" alt="">
 
-                        {{-- <img class="img-fluid w-100"  src="{{ asset('public/uploads/product/' . $product->image) }}" alt=""> alt=""> --}}
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href="{{ route('add.to.cart', $product->id) }}"><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            @if ($product->quantity > 0)
+                                    <a class="btn btn-outline-dark btn-square"
+                                        href="{{ route('add.to.cart', $product->id) }}"><i
+                                            class="fa fa-shopping-cart"></i></a>
+                                @else
+                                    <a class="btn btn-outline-dark btn-square disabled"
+                                        href="{{ route('add.to.cart', $product->id) }}"><i
+                                            class="fa fa-shopping-cart"></i></a>
+                                @endif
+
+                            <a class="btn btn-outline-dark btn-square" href="{{ route('shop.show', $product->id) }}"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
+                        <p class="h6 text-decoration-none text-truncate">
+                            Số lượng {{$product->quantity}}
+                        </p>
+                        <p class="h6 text-decoration-none text-truncate">
+                            Tình trạng
+                            @if ($product->quantity == 0)
+                                <span class="text-danger">Hết hàng</span>
+                            @else
+                                <span class="text-success">Còn hàng</span>
+                            @endif
+                        </p>
+
                         <a class="h6 text-decoration-none text-truncate" href="{{ route('shop.show', $product->id) }}">{{ $product->name }}</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <h5>{{ number_format($product->price) }}</h5><h6 class="text-muted ml-2"><del>{{ number_format($product->price) }}</del></h6>
+
+
                         </div>
+
                     </div>
                 </div>
             </div>
     @endforeach
         </div>
+        <div class="col-md-12">
+            <div class="text-center">
+                <button id="load_more_button" data-page="{{ $products->currentPage() + 1 }}"
+                    class="btn btn-primary">Load More</button>
+            </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function() {
+                var start = 5;
+                var addToCartRoute = "{{ route('add.to.cart', '') }}";
+                $('#load_more_button').click(function() {
+                    $.ajax({
+                        url: "{{ route('load.more') }}",
+                        method: "GET",
+                        data: {
+                            start: start
+                        },
+                        dataType: "json",
+                        beforeSend: function() {
+                            $('#load_more_button').html('Loading...');
+                            $('#load_more_button').attr('disabled', true);
+                        },
+                        success: function(data) {
+                            if (data.data.length > 0) {
+                                var html = '';
+                                for (var i = 0; i < data.data.length; i++) {
+                                    var product = data.data[i];
+                                    var addToCartUrl = addToCartRoute + '/' + product.id;
+                                    var detailUrl = '{{ route("detail", ["id" => ":productId"]) }}';
+                                    detailUrl = detailUrl.replace(':productId', product.id);
+                                    html += `<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                                        <div class="product-item bg-light mb-4">
+                                            <div class="product-img position-relative overflow-hidden">
+                                                <img style="width:200px ; height: 165px ; border-radius:0%"
+                                                    src="{{ asset('public/uploads/product/') }}/${product.image}" alt="">
+                                                <div class="product-action">
+                                                    ${product.quantity > 0 ? `
+                                                        <a class="btn btn-outline-dark btn-square"
+                                                            href="${addToCartUrl}"><i
+                                                                class="fa fa-shopping-cart"></i></a>
+                                                    ` : `
+                                                        <a class="btn btn-outline-dark btn-square disabled"
+                                                            href="${addToCartUrl}"><i
+                                                                class="fa fa-shopping-cart"></i></a>
+                                                    `}
+                                                    <a class="btn btn-outline-dark btn-square"
+                                                        href="${detailUrl}"><i class="fa fa-search"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="text-center py-4">
+                                                <p class="h6 text-decoration-none text-truncate" href="">Số lượng:
+                                                    ${product.quantity}</p>
+                                                <p  id="availability" class="h6 text-decoration-none text-truncate" href="">Tình Trạng
+                                                    ${product.quantity == 0 ? 'Hết hàng' : 'Còn hàng'}
+                                                </p>
+                                                <a class="h6 text-decoration-none text-truncate" href="">${product.name}</a>
+                                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                                    <h5>${product.price}</h5>
+                                                    <h6 class="text-muted ml-2"><del>${product.price}</del></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+                                }
+                                // Append data with fade in effect
+                                $('#items_container').append($(html).hide().fadeIn(1000));
+                                $('#load_more_button').html('Load More');
+                                $('#load_more_button').attr('disabled', false);
+                                start = data.next;
+                            } else {
+                                $('#load_more_button').html('No More Data Available');
+                                $('#load_more_button').attr('disabled', true);
+                            }
+                        }
+                    });
+                });
+            });
+            </script>
 
     <!-- Products End -->
 @endsection
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script>
+    $(document).ready(function() {
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        @endif
+    });
+</script>
+<style>
+    #availability {
+    color: ${product.quantity == 0 ? 'red' : 'green'};
+}
+</style>

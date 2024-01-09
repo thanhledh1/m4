@@ -1,11 +1,11 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
-          <li class="nav-item">
-            {{-- <!-- <a class="nav-link" href="../../index.html">
+          {{-- <li class="nav-item">
+             <a class="nav-link" href="../../index.html">
               <i class="mdi mdi-grid-large menu-icon"></i>
               <span class="menu-title">Dashboard</span>
-            </a> --> --}}
-          </li>
+            </a> 
+          </li> --}}
           <li class="nav-item nav-category">QUẢN LÝ</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
@@ -87,10 +87,10 @@
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                {{-- <li class="nav-item"> <a class="nav-link" href="http://localhost/M3/casestudym3/login.php"> Login </a></li> --}}
+                {{-- <li class="nav-item"> <a class="nav-link" href="{{ route("user.editpass",$user->id)}}"> Đổi mật khẩu </a></li> --}}
               </ul>
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Đăng Xuất</a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf

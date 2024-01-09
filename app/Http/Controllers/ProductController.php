@@ -20,13 +20,12 @@ class ProductController extends Controller
     }
     public function create()
     {
-
         $categories = Category::all(); // Lấy danh sách các categories từ cơ sở dữ liệu
         return view('products.create', compact('categories'));
     }
+
     public function store(ProductRequest $request)
     {
-
         $product = new Product();
         $product->name = $request->name;
         $product->slug = $request->slug;
@@ -49,9 +48,7 @@ class ProductController extends Controller
             $data['product_image'] = $new_image;
         }
         $product->save();
-
         $product = Product::orderBy('created_at', 'desc')->paginate(6);
-        // return redirect()->route('product.index', compact('product'));
         return redirect()->route('product.index')->with('success', 'Thêm sản phẩm thành công!');
 
     }
@@ -60,7 +57,6 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $categories = Category::all(); // Lấy danh sách các categories từ cơ sở dữ liệu
-
         return view('products.edit', compact('product', 'categories'));
     }
 
@@ -89,7 +85,6 @@ class ProductController extends Controller
             $product->image = $new_image;
             $data['product_image'] = $new_image;
         }
-
         $product->save();
 
         return redirect()->route('product.index')->with('success', 'Sửa thành công!');

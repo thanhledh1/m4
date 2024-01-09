@@ -18,9 +18,36 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(4);
         return view('shop', compact('products'));
     }
+
+    public function loadMoreData(Request $request)
+    {
+        $start = $request->input('start');
+
+        $data = Product::orderBy('id', 'ASC')
+            ->offset($start)
+            ->limit(4)
+            ->get();
+
+        return response()->json([
+            'data' => $data,
+            'next' => $start + 4
+        ]);
+    }
+
+    public function detail($id)
+    {
+        $product = Product::find($id);
+        // Lấy các sản phẩm có liên quan (ví dụ: cùng danh mục)
+        $relatedProducts = Product::where('category_id', $product->category_id)
+            ->where('id', '<>', $product->id) // Loại bỏ sản phẩm hiện tại
+            ->inRandomOrder() // Sắp xếp ngẫu nhiên
+            ->get();
+        return view('detail', compact('product', 'relatedProducts'));
+    }
+
 
     public function show($id){
         $product = Product::find($id);
@@ -80,7 +107,7 @@ class ShopController extends Controller
             ];
         }
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        return redirect()->back()->with('success', 'Thêm giỏ hàng thành công!');
     }
     /**
      * Write code on Method
@@ -158,12 +185,11 @@ class ShopController extends Controller
                 ->where('id', '=', $orderItem->product_id)
                 ->decrement('quantity', $orderItem->quantity);
         }
-      
+
         $data = [
             'name' => $request->name,
             'pass' => $request->password,
         ];
-
         return redirect()->route('shop.index')->with('success', 'Đặt Hàng thành công!');
 
     }

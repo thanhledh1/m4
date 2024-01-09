@@ -35,11 +35,11 @@
           </button>
         </div>
         <div>
-          <a class="navbar-brand brand-logo" href="{{ asset('admin/index.html')}}">
-            <img src="{{ asset('admin/images/logo.svg" alt="logo')}}" />
+          <a class="navbar-brand brand-logo" href="{{ route('product.index')}}">
+            <img src="https://t3.ftcdn.net/jpg/03/62/56/24/360_F_362562495_Gau0POzcwR8JCfQuikVUTqzMFTo78vkF.jpg" />
           </a>
           <a class="navbar-brand brand-logo-mini" href="../../index.html">
-            <img src="{{ asset('admin/images/logo-mini.svg" alt="logo')}}" />
+            <img src="https://t3.ftcdn.net/jpg/03/62/56/24/360_F_362562495_Gau0POzcwR8JCfQuikVUTqzMFTo78vkF.jpg" />
           </a>
         </div>
       </div>

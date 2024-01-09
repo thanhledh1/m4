@@ -40,10 +40,6 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        {{-- <h4 class="card-title">Striped Table</h4> --}}
-        {{-- <p class="card-description">
-          Add class <code>.table-striped</code>
-        </p> --}}
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -64,10 +60,10 @@
                             <td>{{ $r->name }}</td>
                             <td>{!! Str::limit($r->description, 20) !!}</td>
                             <td>
-                                @if ($r->status == 1)
-                                    Còn hàng
+                                @if ($r->quantity == 0)
+                                Hết hàng
                                 @else
-                                    Hết hàng
+                                Còn hàng
                                 @endif
                             </td>
                             <td>{{ $r->category->name }}</td>

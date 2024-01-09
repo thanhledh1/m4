@@ -16,24 +16,24 @@ class OrderController extends Controller
     {
         // $this->authorize('viewAny', Order::class);
         $items = Order::select('id', 'customer_id', DB::raw('MAX(created_at) as last_order'))
-        ->groupBy('id','customer_id')
-        ->get();
-        return view('order.index',compact('items'));
+            ->groupBy('id', 'customer_id')
+            ->get();
+        return view('order.index', compact('items'));
     }
     public function detail($id)
     {
         // $this->authorize('view', Order::class);
         $items = DB::table('orders')
-        ->join('customers', 'orders.customer_id', '=', 'customers.id')
-        ->join('orderdetail', 'orders.id', '=', 'orderdetail.order_id')
-        ->join('products', 'orderdetail.product_id', '=', 'products.id')
-        ->select('orders.*', 'customers.name as customer_name', 'products.name as product_name', 'products.price as product_price', 'orderdetail.*')
-        ->where('orders.id', '=', $id)
-        ->orderBy('orders.date_at', 'DESC')
-        ->get();
+            ->join('customers', 'orders.customer_id', '=', 'customers.id')
+            ->join('orderdetail', 'orders.id', '=', 'orderdetail.order_id')
+            ->join('products', 'orderdetail.product_id', '=', 'products.id')
+            ->select('orders.*', 'customers.name as customer_name', 'products.name as product_name', 'products.price as product_price', 'orderdetail.*')
+            ->where('orders.id', '=', $id)
+            ->orderBy('orders.date_at', 'DESC')
+            ->get();
 
         // dd($items);
-        return view('order.orderdetail',compact('items'));
+        return view('order.orderdetail', compact('items'));
     }
     /**
      * Show the form for creating a new resource.
@@ -99,19 +99,15 @@ class OrderController extends Controller
     public function destroy($id)
     {
         $order = Order::findOrFail($id);
-
         // Xóa các chi tiết đơn hàng liên quan
         OrderDetail::where('order_id', $id)->delete();
-
         // Xóa đơn hàng
         $order->delete();
-
         return redirect()->route('order.index')->with('success', 'Đơn hàng đã được xóa thành công.');
     }
 
-    public function exportOrder(){
+    public function exportOrder()
+    {
         return Excel::download(new OrderExport, 'order.xlsx');
     }
-
-
 }

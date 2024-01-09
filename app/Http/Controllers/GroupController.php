@@ -1,10 +1,13 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Models\Group;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class GroupController extends Controller
 {
     /**
@@ -14,14 +17,14 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny',Group::class);
+        $this->authorize('viewAny', Group::class);
         $groups = Group::search()->paginate(10);;
-        $users= User::get();
+        $users = User::get();
         $param = [
             'groups' => $groups,
             'users' => $users
         ];
-        return view('group.index', $param );
+        return view('group.index', $param);
     }
     /**
      * Show the form for creating a new resource.
@@ -30,7 +33,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        $this->authorize('create',Group::class);
+        $this->authorize('create', Group::class);
         return view('group.add');
     }
     /**
@@ -44,8 +47,8 @@ class GroupController extends Controller
         $notification = [
             'addgroup' => 'Thêm Tên Quyền Thành Công!',
         ];
-        $group=new Group();
-        $group->name=$request->name;
+        $group = new Group();
+        $group->name = $request->name;
         $group->save();
         return redirect()->route('group.index')->with($notification);
     }
@@ -67,9 +70,9 @@ class GroupController extends Controller
      */
     public function edit($id)
     {
-        $this->authorize('update',Group::class);
+        $this->authorize('update', Group::class);
         $group = Group::find($id);
-        return view('group.edit', compact('group') );
+        return view('group.edit', compact('group'));
     }
     /**
      * Update the specified resource in storage.
@@ -101,7 +104,7 @@ class GroupController extends Controller
         $group->delete();
         return redirect()->route('group.index')->with('success', 'Thao tác thành công!');;
     }
-     /**
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -109,7 +112,7 @@ class GroupController extends Controller
      */
     public function detail($id)
     {
-        $group=Group::find($id);
+        $group = Group::find($id);
         $current_user = Auth::user();
         $userRoles = $group->roles->pluck('id', 'name')->toArray();
         // dd($userRoles);
@@ -125,19 +128,18 @@ class GroupController extends Controller
             'roles' => $roles,
             'group_names' => $group_names,
         ];
-        return view('group.detail',$params);
+        return view('group.detail', $params);
     }
-     /**
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function group_detail(Request $request,$id)
+    public function group_detail(Request $request, $id)
     {
-
-        $group= Group::find($id);
+        $group = Group::find($id);
         $group->roles()->detach();
         $group->roles()->attach($request->roles);
         return redirect()->route('group.index')->with('success', 'Thao tác thành công!');
