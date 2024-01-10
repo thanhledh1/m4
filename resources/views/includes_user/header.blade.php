@@ -80,6 +80,16 @@
                 <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">.com</span>
             </a>
         </div>
+        <div class="col-lg-4 col-6 text-left">
+            <form autocomplete="off" class="form-inline my-2 my-lg-0" action="{{route('shop.index')}}" method="GET">
+                @csrf
+                  <input class="form-control mr-sm-2" id="keywords" type="search" name="tukhoa" placeholder="Tìm kiếm tác giả,truyện...." aria-label="Search">
+                  <div id="search_ajax"></div>
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+                   {{--  <input class="switch_color_xam" type="checkbox" id="switch_color" data-on="Đen" data-off="Xám" data-toggle="toggle" data-onstyle="dark" data-offstyle="light" data-style="border"> --}}
+
+                </form>
+        </div>
         {{-- <div class="col-lg-4 col-6 text-left">
             <form action="">
                 <div class="input-group">

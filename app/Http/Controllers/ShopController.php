@@ -16,26 +16,49 @@ class ShopController extends Controller
      *
      * @return response()
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(4);
+        $search = $request->input('tukhoa');
+        if (!$search) {
+            $products = Product::paginate(4);
+            return view('shop', compact('products'));
+        }
+        $products = Product::where('name', 'LIKE', '%' . $search . '%')->paginate(4);
         return view('shop', compact('products'));
     }
 
-    public function loadMoreData(Request $request)
-    {
-        $start = $request->input('start');
+    public function autocomplete_ajax(Request $request)
+{
+    $query = $request->input('query');
+    if ($query) {
+        $data = Product::where('name', 'LIKE', '%' . $query . '%')->get();
 
-        $data = Product::orderBy('id', 'ASC')
-            ->offset($start)
-            ->limit(4)
-            ->get();
-
-        return response()->json([
-            'data' => $data,
-            'next' => $start + 4
-        ]);
+        $output = '<ul class="dropdown-menu" style="display:block; background-color: #fff; border: 1px solid #ccc; padding: 10px;">';
+        foreach ($data as $key => $product) {
+            $output .= '<li class="li_search_ajax"><a href="#" style="display: block; padding: 5px 10px; text-decoration: none; color: #333;">';
+            $output .= '<img src="' . asset('public/uploads/product/' . $product->image) . '" alt="Product Image" style="width: 50px; height: 50px; margin-right: 10px;">';
+            $output .= $product->name;
+            $output .= '</a></li>';
+        }
+        $output .= '</ul>';
+        return $output;
     }
+}
+
+public function loadMoreData(Request $request)
+{
+    $start = $request->input('start');
+
+    $data = Product::orderBy('id', 'ASC')
+        ->offset($start)
+        ->limit(4)
+        ->get();
+
+    return response()->json([
+        'data' => $data,
+        'next' => $start + 4
+    ]);
+}
 
     public function detail($id)
     {
@@ -144,7 +167,7 @@ class ShopController extends Controller
     {
         $keyword = $request->input('keyword');
         $products = Product::where('name', 'like', "%$keyword%")
-            ->paginate(3);
+            ->paginate(4);
 
         return view('shop', compact('products'));
     }

@@ -44,7 +44,18 @@ Route::post('/checkout', [CustomerController::class, 'logout'])->name('logout.us
 
 // shop
 Route::prefix('shop')->group(function () {
-    Route::get('/', [ShopController::class, 'index'])->name('shop.index');;
+
+    Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+Route::get('search', [ShopController::class, 'autosearch'])->name('search');
+
+
+Route::post('/autocomplete-ajax',[ShopController::class,'autocomplete_ajax']);
+
+
+Route::get('/load-more-data', [ShopController::class,'loadMoreData'])->name('load.more');
+
+
+    // Route::get('/', [ShopController::class, 'index'])->name('shop.index');;
     Route::get('/{id}/show', [ShopController::class, 'show'])->name('shop.show');
     Route::get('/search2', [ShopController::class, 'search'])->name('shop.search');
     Route::get('apple', [ShopController::class, 'apple'])->name('shop.apple');
@@ -61,19 +72,19 @@ Route::prefix('shop')->group(function () {
     Route::get('/load-more-data', [ShopController::class, 'loadMoreData'])->name('load.more');
     Route::get('products/{id}', [ShopController::class, 'detail'])->name('detail');
 });
-
+//order
 Route::prefix('order')->group(function () {
     Route::get('/', [OrderController::class, 'index'])->name('order.index');
     Route::get('/detail/{id}', [OrderController::class, 'detail'])->name('order.detail');
     Route::delete('/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
     Route::get('/xuat', [OrderController::class, 'exportOrder'])->name('xuat');
 });
-
+//login admin
 Route::get('/adminlogin', [AuthController::class, 'login'])->name('login');
 Route::post('/postlogin', [AuthController::class, 'postlogin'])->name('postlogin');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-//adminư
+//admin
 Route::prefix('/')->middleware(['auth', 'preventBackHistory'])->group(function () {
 
     Route::group(['prefix' => 'users'], function () {
@@ -89,7 +100,7 @@ Route::prefix('/')->middleware(['auth', 'preventBackHistory'])->group(function (
         Route::get('/adminpass/{id}', [UserController::class, 'adminpass'])->name('user.adminpass');
         Route::put('/adminUpdatePass/{id}', [UserController::class, 'adminUpdatePass'])->name('user.adminUpdatePass');
     });
-
+// bang category
     Route::prefix('category')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('category.index');
         Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
@@ -100,7 +111,7 @@ Route::prefix('/')->middleware(['auth', 'preventBackHistory'])->group(function (
     });
     Route::get('/search', [CategoryController::class, 'search'])->name('category.search');
 
-    //bang products
+ //bang products
     Route::prefix('product')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('product.index');
         Route::get('/create', [ProductController::class, 'create'])->name('product.create');
@@ -118,7 +129,7 @@ Route::prefix('/')->middleware(['auth', 'preventBackHistory'])->group(function (
 
     Route::get('/search1', [ProductController::class, 'search'])->name('product.search');
     Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
-
+//group
     Route::group(['prefix' => 'groups'], function () {
         Route::get('/', [GroupController::class, 'index'])->name('group.index');
         Route::get('/create', [GroupController::class, 'create'])->name('group.create');
